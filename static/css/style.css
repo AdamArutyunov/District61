@@ -1,3 +1,253 @@
+@font-face {
+  font-family: "PixelTimes";
+  src: url(/static/fonts/PixelTimes.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Bahnschrift";
+  src: url(/static/fonts/Bahnschrift.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+.green {
+  color: #00B050;
+}
+
+.red {
+  color: #EE0000;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+html {
+  height: 100%;
+}
+
+.pixel {
+  font-family: "PixelTimes";
+}
+
 body {
-  background-color: black;
+  background-color: #080808;
+  font-family: "Bahnschrift";
+  font-weight: normal;
+  font-variation-settings: "wght" 300;
+  font-size: 16pt;
+  min-height: 100%;
+  color: white;
+  padding-bottom: 100px;
+}
+
+header {
+  background-color: #00B050;
+  padding-left: 20px;
+}
+header h1 {
+  color: black !important;
+}
+
+sspace {
+  display: block;
+  height: 10px;
+}
+
+mspace {
+  display: block;
+  height: 30px;
+}
+
+lspace {
+  display: block;
+  height: 50px;
+}
+
+xspace {
+  display: block;
+  height: 100px;
+}
+@font-face {
+  font-family: "PixelTimes";
+  src: url(/static/fonts/PixelTimes.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Bahnschrift";
+  src: url(/static/fonts/Bahnschrift.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+h2, h1, h0 {
+  font-family: "PixelTimes";
+  font-weight: bold;
+}
+
+.green {
+  color: #00B050;
+}
+
+.red {
+  color: #EE0000;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+html {
+  height: 100%;
+}
+
+.pixel {
+  font-family: "PixelTimes";
+}
+
+body {
+  background-color: #080808;
+  font-family: "Bahnschrift";
+  font-weight: normal;
+  font-variation-settings: "wght" 300;
+  font-size: 16pt;
+  min-height: 100%;
+  color: white;
+  padding-bottom: 100px;
+}
+
+header {
+  background-color: #00B050;
+  padding-left: 20px;
+}
+header h1 {
+  color: black !important;
+}
+
+sspace {
+  display: block;
+  height: 10px;
+}
+
+mspace {
+  display: block;
+  height: 30px;
+}
+
+lspace {
+  display: block;
+  height: 50px;
+}
+
+xspace {
+  display: block;
+  height: 100px;
+}
+
+h0 {
+  display: block;
+  color: white;
+  font-size: 100pt;
+}
+
+h1 {
+  font-size: 70pt;
+}
+
+h2 {
+  font-size: 50pt;
+}
+
+h3 {
+  font-size: 30pt;
+}
+
+#main {
+  margin: 0 20px;
+}
+
+#map {
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid white;
+}
+
+a {
+  font-family: "PixelTimes";
+  font-size: 35pt;
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px solid white;
+}
+a.implicit {
+  border: none;
+}
+a:hover {
+  color: #00B050;
+  border-color: #00B050;
+}
+
+.link {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.links {
+  line-height: 1.5;
+}
+
+.rating {
+  font-family: "PixelTimes";
+  font-size: 30pt;
+  font-weight: normal;
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+}
+.buttons .button {
+  flex-basis: 0;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 5px 20px;
+  margin-right: 10px;
+}
+.buttons .button.good {
+  background-color: #00B050;
+}
+.buttons .button.bad {
+  background-color: #EE0000;
+}
+.buttons .button a:hover {
+  color: white;
+}
+
+.report {
+  width: 100%;
+  max-width: 600px;
+}
+
+.vote {
+  display: inline-block;
+  margin-right: 50px;
+}
+.vote .vote-button {
+  display: inline-block;
+  margin-right: 10px;
+}
+.vote .vote-button.up {
+  color: #00B050;
+}
+.vote .vote-button.down {
+  color: #EE0000;
 }

@@ -1,0 +1,66 @@
+@import constants.sass
+
+@font-face
+  font-family: 'PixelTimes'
+  src: url('../fonts/PixelTimes.ttf')
+  font-weight: normal
+  font-style: normal
+
+@font-face
+  font-family: 'Bahnschrift'
+  src: url('../fonts/Bahnschrift.ttf')
+  font-weight: normal
+  font-style: normal
+
+%title-like
+  font-family: 'PixelTimes'
+  font-weight: bold
+
+.green
+  color: $main-color
+
+.red
+  color: $red
+
+*
+    padding: 0
+    margin: 0
+    position: relative
+
+html
+    height: 100%
+
+.pixel
+    font-family: "PixelTimes"
+
+body
+    background-color: #080808
+    font-family: 'Bahnschrift'
+    font-weight: normal
+    font-variation-settings: "wght" 300
+    font-size: 16pt
+    min-height: 100%
+    color: white
+    padding-bottom: 100px 
+
+header
+    background-color: $main-color
+    padding-left: 20px
+    & h1
+        color: black !important
+
+sspace
+    display: block
+    height: 10px
+
+mspace
+    display: block
+    height: 30px
+
+lspace
+    display: block
+    height: 50px
+
+xspace
+    display: block
+    height: 100px

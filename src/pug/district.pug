@@ -1,0 +1,55 @@
+extends base.pug
+
+block content
+  header
+    a.implicit(href='/')
+      h1
+        | District 61
+  div#main
+    h0
+      =title
+
+    sspace
+
+    span.rating
+      | Рейтинг: 
+      span#rating
+        =district.rating
+
+    sspace
+
+    .buttons
+      .button.good
+        a.implicit(href=`/district/${district.id}/report_good`)
+          | Похвалить
+      .button.bad
+        a.implicit(href=`/district/${district.id}/report_bad`)
+          | Поругать
+
+    lspace
+
+    each report in district.reports
+      if report.is_good
+        span.green.pixel.small
+          | П О Х В А Л А
+      else
+        span.red.pixel.small
+          | Ж А Л О Б А
+      sspace
+      .report
+        | «
+        =report.body
+        | »
+      sspace
+      .vote-menu
+        .vote
+          .vote-button.up
+            | ▲
+          =report.likes
+        .vote
+          .vote-button.down
+            | ▼
+          =report.dislikes
+
+      mspace
+      sspace

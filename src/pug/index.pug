@@ -1,3 +1,22 @@
 extends base.pug
 
 block content
+  div#main
+    h1.green
+      | District 61
+
+    sspace
+    
+    div#map.
+      Я карта, я карта, я карта!
+
+    mspace
+
+    h2.green
+      | Районы
+
+    .links
+      each district in districts
+        .link
+          a(href=`/district/${district.id}`)
+            =district.name
