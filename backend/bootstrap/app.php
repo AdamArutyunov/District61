@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Middleware\ExampleMiddleware;
-use Nord\Lumen\Cors\CorsMiddleware;
+use App\Http\Middleware\CorsMiddleware;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -76,7 +75,7 @@ $app->configure('app');
 */
 
  $app->middleware([
-     ExampleMiddleware::class
+     CorsMiddleware::class
  ]);
 
  $app->routeMiddleware([
@@ -119,7 +118,6 @@ $app->router->group([
 
 $app->withEloquent();
 $app->withFacades();
-$app->register('Nord\Lumen\Cors\CorsServiceProvider');
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
 

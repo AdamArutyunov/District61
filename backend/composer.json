@@ -10,8 +10,7 @@
         "ext-simplexml": "*",
         "flipbox/lumen-generator": "^8.2",
         "irazasyed/larasupport": "^1.7",
-        "laravel/lumen-framework": "^8.0",
-        "nordsoftware/lumen-cors": "^3.4"
+        "laravel/lumen-framework": "^8.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
