@@ -5,6 +5,7 @@ block content
     a.implicit(href='/')
       h1
         | District 61
+  mspace
   div#main
     h0
       =title
@@ -16,7 +17,7 @@ block content
       span#rating
         =district.rating
 
-    sspace
+    mspace
 
     .buttons
       .button.good
@@ -43,13 +44,15 @@ block content
       sspace
       .vote-menu
         .vote
-          .vote-button.up
+          .vote-button.up(onclick=`window.like_report(${report.id})`, onselectstart='return false')
             | ▲
-          =report.likes
+          span(id=`l${report.id}`)
+            =report.likes
         .vote
-          .vote-button.down
+          .vote-button.down(onclick=`window.dislike_report(${report.id})`, onselectstart='return false')
             | ▼
-          =report.dislikes
+          span(id=`d${report.id}`)
+            =report.dislikes
 
       mspace
       sspace

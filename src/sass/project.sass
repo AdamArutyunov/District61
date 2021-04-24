@@ -1,11 +1,17 @@
 @import base.sass
 @import constants.sass
-  
+
+hmax
+  @extend %title-like
+  display: block
+  font-size: 200pt
+
 h0
   @extend %title-like
   display: block
   color: white
   font-size: 100pt
+  line-height: 1
 
 h1
   @extend %title-like
@@ -60,23 +66,23 @@ a
   width: 100%
   max-width: 500px
 
-  & .button
-    flex-basis: 0
-    display: flex
-    justify-items: center
-    align-items: center
-    border-radius: 10px
-    padding: 5px 20px
-    margin-right: 10px
+.button
+  flex-basis: 0
+  display: flex
+  justify-items: center
+  align-items: center
+  border-radius: 10px
+  padding: 5px 20px
+  margin-right: 10px
 
-    &.good
-      background-color: $main-color
+  &.good
+    background-color: $main-color
 
-    &.bad
-      background-color: $red
+  &.bad
+    background-color: $red
 
-    & a:hover
-      color: white
+  & a:hover
+    color: white
 
 .report
   width: 100%
@@ -89,9 +95,37 @@ a
   .vote-button
     display: inline-block
     margin-right: 10px
+    cursor: pointer
 
     &.up
       color: $main-color
     &.down
       color: $red
+
+textarea
+  width: 100%
+  max-width: 800px
+  height: 400px
+  background-color: black
+  border-color: white
+  color: white
+  outline: none
+  padding: 10px
+  font-size: 20pt
+
+.primary-button
+  border: none
+  padding: 15px 25px
+  color: white
+  border-radius: 10px
+  font-size: 25pt
+  white-space: nowrap
+  font-family: 'PixelTimes'
+  cursor: pointer
+
+  &.green
+    background-color: $main-color
+  
+  &.red
+    background-color: $red
     

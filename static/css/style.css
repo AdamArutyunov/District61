@@ -82,7 +82,7 @@ xspace {
   font-weight: normal;
   font-style: normal;
 }
-h2, h1, h0 {
+h2, h1, h0, hmax {
   font-family: "PixelTimes";
   font-weight: bold;
 }
@@ -148,10 +148,16 @@ xspace {
   height: 100px;
 }
 
+hmax {
+  display: block;
+  font-size: 200pt;
+}
+
 h0 {
   display: block;
   color: white;
   font-size: 100pt;
+  line-height: 1;
 }
 
 h1 {
@@ -213,7 +219,8 @@ a:hover {
   width: 100%;
   max-width: 500px;
 }
-.buttons .button {
+
+.button {
   flex-basis: 0;
   display: flex;
   justify-items: center;
@@ -222,13 +229,13 @@ a:hover {
   padding: 5px 20px;
   margin-right: 10px;
 }
-.buttons .button.good {
+.button.good {
   background-color: #00B050;
 }
-.buttons .button.bad {
+.button.bad {
   background-color: #EE0000;
 }
-.buttons .button a:hover {
+.button a:hover {
   color: white;
 }
 
@@ -244,10 +251,40 @@ a:hover {
 .vote .vote-button {
   display: inline-block;
   margin-right: 10px;
+  cursor: pointer;
 }
 .vote .vote-button.up {
   color: #00B050;
 }
 .vote .vote-button.down {
   color: #EE0000;
+}
+
+textarea {
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  background-color: black;
+  border-color: white;
+  color: white;
+  outline: none;
+  padding: 10px;
+  font-size: 20pt;
+}
+
+.primary-button {
+  border: none;
+  padding: 15px 25px;
+  color: white;
+  border-radius: 10px;
+  font-size: 25pt;
+  white-space: nowrap;
+  font-family: "PixelTimes";
+  cursor: pointer;
+}
+.primary-button.green {
+  background-color: #00B050;
+}
+.primary-button.red {
+  background-color: #EE0000;
 }

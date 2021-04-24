@@ -44,6 +44,29 @@ if (rating) {
   rating.style.color = rating_colors[rating_int]
 }
 
+function like_report(report_id) {
+  send_feedback(report_id, 'like', `#l${report_id}`)
+}
+
+function dislike_report(report_id) {
+  send_feedback(report_id, 'dislike', `#d${report_id}`)
+}
+
+function send_feedback(report_id, type, counter) {
+  json_body = {report_id: report_id, type: type}
+  $(counter).html(Number($(counter).html()) + 1)
+  $.ajax({
+    type: "POST",
+    url: '/send_feedback',
+    data: json_body,
+    success: function (data) {
+    }
+  })
+}
+
+window.like_report = like_report
+window.dislike_report = dislike_report
+
 /***/ })
 
 /******/ 	});

@@ -5,6 +5,22 @@ block content
     a.implicit(href='/')
       h1
         | District 61
+  mspace
   div#main
-    h0
-      =title
+    if action == 'bad'
+      h0.red
+        | П О Р У Г А Т Ь
+    else
+      h0.green
+        | П О Х В А Л И Т Ь
+
+    sspace
+
+    form(method='post', action='')
+      textarea(name='body')
+      mspace
+      if action == 'bad'
+        input.primary-button.red(type='submit', value='ОТПРАВИТЬ')
+      else
+        input.primary-button.green(type='submit', value='ОТПРАВИТЬ')
+
