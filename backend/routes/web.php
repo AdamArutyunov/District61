@@ -1,6 +1,12 @@
 <?php
 
 /** @var \Laravel\Lumen\Routing\Router $router */
+$router->group(['prefix' => 'auth'], function () use ($router) {
+    // Matches "/api/register
+    $router->post('register', 'AuthController@register');
+    $router->post('login', 'AuthController@login');
+
+});
 
 
 $router->get('districts', ['uses' => 'DistrictController@index', 'as' => 'neighborhood.index']);

@@ -2,7 +2,7 @@
 
 use App\Http\Middleware\CorsMiddleware;
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
     dirname(__DIR__)
@@ -74,15 +74,15 @@ $app->configure('app');
 |
 */
 
- $app->middleware([
-     CorsMiddleware::class
- ]);
+$app->middleware([
+    CorsMiddleware::class
+]);
 
- $app->routeMiddleware([
-     //'auth' => App\Http\Middleware\Authenticate::class,
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
 //     "cors" => CorsMiddleware::Class,
 //     "example" => ExampleMiddleware::class
- ]);
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -96,7 +96,7 @@ $app->configure('app');
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*
@@ -113,12 +113,13 @@ $app->configure('app');
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
-    require __DIR__.'/../routes/web.php';
+    require __DIR__ . '/../routes/web.php';
 });
 
 $app->withEloquent();
 $app->withFacades();
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
 return $app;

@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function create(Request $request): JsonResponse
     {
         $report = new Report();
@@ -25,7 +31,7 @@ class ReportController extends Controller
 
         $report = Report::with("district")->findOrFail($request->get("report_id"));
         $feedbackType = $request->get("type");
-        switch ($feedbackType){
+        switch ($feedbackType) {
             case "like":
                 $report->likes++;
                 break;

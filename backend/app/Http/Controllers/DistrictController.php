@@ -6,7 +6,13 @@ use App\Models\District;
 use Illuminate\Http\JsonResponse;
 
 
-class DistrictController extends Controller{
+class DistrictController extends Controller
+{
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index(): JsonResponse
     {
