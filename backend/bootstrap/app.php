@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\CorsMiddleware;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -80,6 +81,7 @@ $app->middleware([
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'admin' => AdminMiddleware::class
 //     "cors" => CorsMiddleware::Class,
 //     "example" => ExampleMiddleware::class
 ]);

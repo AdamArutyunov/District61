@@ -14,3 +14,6 @@ $router->get('districts/{id}', ['uses' => 'DistrictController@getDistrict', 'as'
 $router->post('report/create', ['uses' => 'ReportController@create', 'as' => 'report.create']);
 $router->post('report/createFeedback', ['uses' => 'ReportController@createFeedback', 'as' => 'report.createFeedback']);
 
+$router->group(["middleware" => "admin"], function() use ($router) {
+    $router->delete("report/delete/{id}", ['uses' => 'ReportController@destroy', 'as' => 'report.destroy']);
+});

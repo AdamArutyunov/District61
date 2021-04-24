@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +17,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
         //validate incoming request
         $this->validate($request, [
@@ -34,14 +36,17 @@ class AuthController extends Controller
             //return successful response
             return response()->json(["error" => false, "token" => Auth::attempt($request->only(['email', 'password'])), 'expires_in' => Auth::factory()->getTTL() * 60], 201);
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             //return error message
             return response()->json(['error' => true, "message" => $e->getMessage()], 409);
         }
 
     }
 
-    public function login(Request $request)
+    /**
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function login(Request $request): JsonResponse
     {
         //validate incoming request
         $this->validate($request, [

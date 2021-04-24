@@ -44,4 +44,9 @@ class ReportController extends Controller
         $report->save();
         return response()->json("ok");
     }
+
+    public function destroy($id){
+        Report::destroy($id);
+        return response()->json("ok");
+    }
 }
