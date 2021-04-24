@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Neighbourhood;
+use App\Models\District;
 use Illuminate\Console\Command;
 
 class generateDistricts extends Command
@@ -42,9 +42,9 @@ class generateDistricts extends Command
                  $coords[$i] = array_reverse(array_slice($coords[$i], 0, 2));
              }
 
-             $neighbourhood = new Neighbourhood();
-             $neighbourhood->fill(["name" => $feature["properties"]["name"], "coords" => json_encode($coords)]);
-             $neighbourhood->save();
+             $district = new District();
+             $district->fill(["name" => $feature["properties"]["name"], "coords" => json_encode($coords)]);
+             $district->save();
          }
     }
 }
