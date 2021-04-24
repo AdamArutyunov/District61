@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Neighbourhood;
 use App\Models\Report;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class ReportController extends Controller
 
     public function createFeedback(Request $request): JsonResponse
     {
-        $report = Report::findOrFail($request->get("report_id"));
+        $report = Report::with("neighborhood")->findOrFail($request->get("report_id"));
         $feedbackType = $request->get("type");
         switch ($feedbackType){
             case "like":
@@ -27,6 +28,8 @@ class ReportController extends Controller
             case "dislike":
                 $report->dislikes++;
         }
+        $district = $report->neighbourhood;
+        dump($district);
         $report->save();
         return response()->json("ok");
     }

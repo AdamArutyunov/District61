@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\ExampleMiddleware;
+use Nord\Lumen\Cors\CorsMiddleware;
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
@@ -72,13 +75,15 @@ $app->configure('app');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+ $app->middleware([
+     ExampleMiddleware::class
+ ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+ $app->routeMiddleware([
+     //'auth' => App\Http\Middleware\Authenticate::class,
+//     "cors" => CorsMiddleware::Class,
+//     "example" => ExampleMiddleware::class
+ ]);
 
 /*
 |--------------------------------------------------------------------------
@@ -114,6 +119,7 @@ $app->router->group([
 
 $app->withEloquent();
 $app->withFacades();
+$app->register('Nord\Lumen\Cors\CorsServiceProvider');
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
 

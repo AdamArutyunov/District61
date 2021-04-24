@@ -10,12 +10,12 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class NeighborhoodController extends Controller{
     public function index(): JsonResponse
     {
-        return response()->json(Neighbourhood::all());
+        return response()->json(Neighbourhood::with("reports")->get());
     }
 
     public function getNeighbourhood($id): JsonResponse
     {
-        $neighbourhood = Neighbourhood::findOrFail($id);
+        $neighbourhood = Neighbourhood::with("reports")->findOrFail($id);
         return response()->json($neighbourhood);
     }
 
