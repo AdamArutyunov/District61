@@ -32,11 +32,11 @@ class AuthController extends Controller
             $user->save();
 
             //return successful response
-            return response()->json(['user' => $user, 'message' => 'CREATED'], 201);
+            return response()->json(["error" => false, "token" => Auth::attempt($request->only(['email', 'password']))], 201);
 
         } catch (\Exception $e) {
             //return error message
-            return response()->json(['message' => $e->getMessage()], 409);
+            return response()->json(['error' => true, "message" => $e->getMessage()], 409);
         }
 
     }
