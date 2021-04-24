@@ -32,7 +32,7 @@ class AuthController extends Controller
             $user->save();
 
             //return successful response
-            return response()->json(["error" => false, "token" => Auth::attempt($request->only(['email', 'password']))], 201);
+            return response()->json(["error" => false, "token" => Auth::attempt($request->only(['email', 'password'])), 'expires_in' => Auth::factory()->getTTL() * 60], 201);
 
         } catch (\Exception $e) {
             //return error message
@@ -55,7 +55,11 @@ class AuthController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        return $this->respondWithToken($token);
+        return response()->json([
+            'token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => Auth::factory()->getTTL() * 60
+        ], 200);
     }
 
 }
