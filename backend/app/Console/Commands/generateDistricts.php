@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Neighbourhood;
+use App\Models\District;
 use Illuminate\Console\Command;
 
 class generateDistricts extends Command
@@ -34,12 +34,17 @@ class generateDistricts extends Command
 
     public function handle()
     {
-        $xml = simplexml_load_file(public_path()."/map.kml");
-        foreach($xml->Document->Placemark as $pm){
-            $neighbourhood = new Neighbourhood();
-            $c = "N047.14.14.451,E039.43.08.672;N047.14.39.148,E039.43.07.103;N047.14.39.165,E039.43.07.137;N047.14.40.023,E039.42.46.884;N047.14.15.424,E039.42.48.478;N047.14.11.763,E039.42.50.759;N047.14.13.283,E039.42.59.424;N047.14.14.451,E039.43.08.672;";
-            $neighbourhood->fill(["name" => $pm->name, "coords" => $c]);
-            $neighbourhood->save();
-        }
+         shell_exec("k2g ".public_path()."/map/raw.kml ".public_path()."/map");
+         $features = json_decode(file_get_contents(public_path()."/map/raw.geojson"), true)["features"];
+         foreach($features as $feature){
+             $coords = $feature["geometry"]["coordinates"][0];
+             for($i = 0; $i < count($coords); $i++){
+                 $coords[$i] = array_reverse(array_slice($coords[$i], 0, 2));
+             }
+
+             $district = new District();
+             $district->fill(["name" => $feature["properties"]["name"], "coords" => json_encode($coords)]);
+             $district->save();
+         }
     }
 }
