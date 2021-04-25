@@ -37,7 +37,6 @@ class ReportController extends Controller
     {
 
         $this->validate($request, [
-            "user_id" => 'required|integer',
             "report_id" => "required|integer",
             "type" => "required",
         ]);
@@ -46,6 +45,7 @@ class ReportController extends Controller
         }
         $r = new Reaction();
         $r->fill($request->all());
+        $r->user_id = auth()->user()->id;
         $r->save();
         $district = District::with("reports")->where("id", Report::find($request->get("report_id"))->district_id)->first();
         RateService::reEstimate($district);

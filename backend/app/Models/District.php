@@ -13,4 +13,8 @@ class District extends Model
     {
         return $this->hasMany(Report::class, "district_id", "id");
     }
+
+    public function user(){
+        return $this->belongsToMany(User::class);
+    }
 }

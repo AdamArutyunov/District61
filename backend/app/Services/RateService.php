@@ -3,6 +3,8 @@
 namespace App\Services;
 
 
+use App\Models\Reaction;
+
 class RateService
 {
     public static function reEstimate($district)
@@ -20,20 +22,22 @@ class RateService
         $down = 0;
 
         foreach ($reports as $report) {
-
-            $s = ($report->likes + $report->dislikes == 0) ? 1 : ($report->likes + $report->dislikes);
+            $likes = Reaction::where("report_id", $report->id)->where("type", "like")->count();
+            $dislikes = Reaction::where("report_id", $report->id)->where("type", "dislike")->count();
+            $s = ($likes + $dislikes == 0) ? 1 : ($likes + $dislikes);
             $w = 1;
             if ($s > 0) {
-                $w = pow($report->likes / $s, 1) * pow($s, 1 / 4);
+                $w = pow($likes / $s, 1) * pow($s, 1 / 4);
             }
 
             $down += $w;
-            $top += $w * $report->is_good;
+            $top += $w * ($report->is_good ? 1 : (-1));
         }
         if ($down == 0) {
             return 5.5;
         }
-        return ($top / $down) * 10;
+
+        return ($top / $down) * 4.5 + 5.5;
 
     }
 
