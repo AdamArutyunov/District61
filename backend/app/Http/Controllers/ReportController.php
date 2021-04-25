@@ -18,6 +18,11 @@ class ReportController extends Controller
 
     public function create(Request $request): JsonResponse
     {
+        $this->validate($request, [
+            'district_id' => 'required|integer',
+            'body' => 'required|max:5000',
+            'is_good' => 'required|boolean'
+        ]);
         $report = new Report();
         $report->fill($request->all());
         $report->save();

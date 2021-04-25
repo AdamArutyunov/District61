@@ -18,6 +18,7 @@ class CreateReportsTable extends Migration
             $table->integer("district_id");
             $table->mediumText("body");
             $table->boolean("is_good");
+            $table->integer("user_id");
             $table->integer("likes")->default(0);
             $table->integer("dislikes")->default(0);
         });
