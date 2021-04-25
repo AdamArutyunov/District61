@@ -9,7 +9,8 @@ class District extends Model
     public $timestamps = false;
     protected $fillable = ["name", "rating", "coords"];
 
-    public function reports(){
+    public function reports()
+    {
         return $this->hasMany(Report::class, "district_id", "id");
     }
 }
