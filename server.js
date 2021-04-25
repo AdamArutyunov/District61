@@ -8,7 +8,8 @@ const app = express()
 const DEBUG = (process.argv[2] == "-D")
 
 var config = require("./config.json")
-const { request, response } = require('express')
+const { request, response } = require('express');
+const { rejects } = require('assert');
 const port = config.PORT
 
 const urlencodedParser = bodyParser.urlencoded({extended: false});
@@ -17,6 +18,12 @@ app.set('views', './src/pug')
 app.set('view engine', 'pug');
 app.use('/static', express.static('static'));
 app.use(cookieParser())
+
+app.get('/forward/:path', (request, response) => {
+    return fetch(config.API_ENDPOINT + request.params.path).then(result => result.json()).then(
+        result => response.send(result)
+    )
+})
 
 function send_report(json_body) {
     return fetch(config.API_ENDPOINT + 'report/create', {
@@ -83,13 +90,13 @@ app.post('/district/:districtId/report_bad', urlencodedParser, (request, respons
 })
 
 app.post('/send_feedback', urlencodedParser, (request, response) => {
+    if (!request.cookies.token) response.sendStatus(401)
+    request.body.token = request.cookies.token
     fetch(config.API_ENDPOINT + 'report/createFeedback', {
         method: 'post',
         body: JSON.stringify(request.body),
         headers: {'Content-Type': 'application/json'}
     }).then(res => {
-        console.log(request.body)
-        console.log(res)
         response.sendStatus(200)
     })
 })
@@ -118,6 +125,32 @@ app.post('/login', urlencodedParser, (request, response) => {
         } else {
             response.render('login', {message: 'НЕПРАВИЛЬНЫЙ ЛОГИН ИЛИ ПАРОЛЬ!'})
         }
+    })
+})
+
+app.get('/register', (request, response) => {
+    response.render('register')
+})
+
+app.post('/register', urlencodedParser, (request, response) => {
+    var email = request.body.email
+    var login = request.body.login
+    var password = request.body.password
+
+    json_data = {
+        email: email,
+        login: login,
+        password: password
+    }
+
+    fetch(config.API_ENDPOINT + 'auth/register', {
+        method: 'post',
+        body: JSON.stringify(json_data),
+        headers: {'Content-Type': 'application/json'}
+    }).then(res => res.json()).then(res => {
+        console.log(res.token)
+        response.cookie('token', res.token, {maxAge: 3600 * 1000, httpOnly: true})
+        response.redirect('/')
     })
 })
 

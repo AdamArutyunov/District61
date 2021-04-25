@@ -8,13 +8,19 @@ block content
   lspace
   div#main
     h0.red
-      | ВОЙТИ
-    a(href='/register')
       | РЕГИСТРАЦИЯ
+    a(href='/login')
+      | ВОЙТИ
 
     mspace
 
     form(method='post', action='')
+      label(for='login')
+        | Логин
+      input(name='login', type='text')
+
+      mspace
+
       label(for='email')
         | Почта
       input(name='email', type='text')
@@ -27,7 +33,7 @@ block content
 
       lspace
 
-      input.primary-button.green(type='submit', value='ВОЙТИ')
+      input.primary-button.green(type='submit', value='ЗАРЕГИСТРИРОВАТЬСЯ')
 
       mspace
 

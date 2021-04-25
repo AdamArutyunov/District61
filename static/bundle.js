@@ -53,12 +53,15 @@ function dislike_report(report_id) {
 
 function send_feedback(report_id, type, counter) {
   json_body = {report_id: report_id, type: type}
-  $(counter).html(Number($(counter).html()) + 1)
   $.ajax({
     type: "POST",
     url: '/send_feedback',
     data: json_body,
+    error: function (data) {
+      window.location.replace('/login')
+    },
     success: function (data) {
+      $(counter).html(Number($(counter).html()) + 1)
     }
   })
 }

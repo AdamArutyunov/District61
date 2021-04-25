@@ -6,7 +6,7 @@ window.onload = function() {
             zoom: 13.3
         })
         
-        fetch('http://a43810d97e04.ngrok.io/districts/', { 
+        fetch('/forward/districts/', { 
             method: 'GET'
         }).then(response => 
             response.json()
