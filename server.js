@@ -45,7 +45,10 @@ app.get('/district/:districtId', (request, response) => {
     fetch(config.API_ENDPOINT + 'districts/' + request.params.districtId).then(
         result => result.json()
     ).then(
-        district => response.render('district', {title: district.name, district: district})
+        district => {
+            district.rating = district.rating.toFixed(2)
+            response.render('district', {title: district.name, district: district})
+        }
     )
 })
 
@@ -68,7 +71,7 @@ app.post('/district/:districtId/report_good', urlencodedParser, (request, respon
         token: request.cookies.token
     }
     send_report(json_body).then(
-        result => response.redirect(`/district/${request.params.districtId}`)
+        result => {console.log(result); response.redirect(`/district/${request.params.districtId}`)}
     )
 })
 
@@ -83,7 +86,6 @@ app.post('/district/:districtId/report_bad', urlencodedParser, (request, respons
     console.log(request.cookies.token)
     send_report(json_body).then(
         result => {
-            console.log(result)
             response.redirect(`/district/${request.params.districtId}`)
         }
     )
@@ -106,17 +108,9 @@ app.get('/login', (request, response) => {
 })
 
 app.post('/login', urlencodedParser, (request, response) => {
-    var email = request.body.email
-    var password = request.body.password
-
-    json_data = {
-        email: email,
-        password: password
-    }
-
     fetch(config.API_ENDPOINT + 'auth/login', {
         method: 'post',
-        body: JSON.stringify(json_data),
+        body: JSON.stringify(request.body),
         headers: {'Content-Type': 'application/json'}
     }).then(res => res.json()).then(res => {
         if (res.token) {
@@ -129,23 +123,13 @@ app.post('/login', urlencodedParser, (request, response) => {
 })
 
 app.get('/register', (request, response) => {
-    response.render('register')
+    fetch(config.API_ENDPOINT + 'districts').then(res => res.json()).then(res => response.render('register', {districts: res}))
 })
 
 app.post('/register', urlencodedParser, (request, response) => {
-    var email = request.body.email
-    var login = request.body.login
-    var password = request.body.password
-
-    json_data = {
-        email: email,
-        login: login,
-        password: password
-    }
-
     fetch(config.API_ENDPOINT + 'auth/register', {
         method: 'post',
-        body: JSON.stringify(json_data),
+        body: JSON.stringify(request.body),
         headers: {'Content-Type': 'application/json'}
     }).then(res => res.json()).then(res => {
         console.log(res.token)

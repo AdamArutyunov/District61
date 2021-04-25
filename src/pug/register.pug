@@ -31,6 +31,15 @@ block content
         | Пароль
       input(name='password', type='password')
 
+      mspace
+      
+      label(for='password')
+        | Район
+      select(name='district_id')
+        each district in districts
+          option(value=district.id)
+            =district.name
+
       lspace
 
       input.primary-button.green(type='submit', value='ЗАРЕГИСТРИРОВАТЬСЯ')
