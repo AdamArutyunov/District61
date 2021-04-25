@@ -17,7 +17,7 @@ class CreateDistrictsTable extends Migration
             $table->id();
             $table->string("name");
             $table->float("rating")->default(0);
-            $table->text("coords");
+            $table->json("coords");
         });
     }
 
