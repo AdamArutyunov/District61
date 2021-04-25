@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\District;
+use App\Models\Reaction;
 use App\Models\Report;
 use App\Services\RateService;
 use Illuminate\Http\JsonResponse;
@@ -21,7 +22,8 @@ class ReportController extends Controller
         $this->validate($request, [
             'district_id' => 'required|integer',
             'body' => 'required|max:5000',
-            'is_good' => 'required|boolean'
+            'is_good' => 'required|boolean',
+            "user_id" => "required"
         ]);
         $report = new Report();
         $report->fill($request->all());
@@ -34,19 +36,19 @@ class ReportController extends Controller
     public function createFeedback(Request $request): JsonResponse
     {
 
-        $report = Report::with("district")->findOrFail($request->get("report_id"));
-        $feedbackType = $request->get("type");
-        switch ($feedbackType) {
-            case "like":
-                $report->likes++;
-                break;
-            case "dislike":
-                $report->dislikes++;
+        $this->validate($request, [
+            "user_id" => 'required|integer',
+            "report_id" => "required|integer",
+            "type" => "required",
+        ]);
+        if (Reaction::where("user_id", $request->user_id)->where("report_id", $request->get("report_id"))->count() > 0){
+            return response()->json(["error" => true, "message" => "Вы уже делали реакцию на этот отзыв"]);
         }
-
-        $district = District::with("reports")->where("id", $report->district_id)->first();
+        $r = new Reaction();
+        $r->fill($request->all());
+        $r->save();
+        $district = District::with("reports")->where("id", Report::find($request->get("report_id"))->district_id)->first();
         RateService::reEstimate($district);
-        $report->save();
         return response()->json("ok");
     }
 
