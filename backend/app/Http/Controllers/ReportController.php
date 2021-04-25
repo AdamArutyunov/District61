@@ -23,10 +23,10 @@ class ReportController extends Controller
             'district_id' => 'required|integer',
             'body' => 'required|max:5000',
             'is_good' => 'required|boolean',
-            "user_id" => "required"
         ]);
         $report = new Report();
         $report->fill($request->all());
+        $report->user_id = auth()->user()->id;
         $report->save();
         $district = District::with("reports")->where("id", $request->get("district_id"))->first();
         RateService::reEstimate($district);
