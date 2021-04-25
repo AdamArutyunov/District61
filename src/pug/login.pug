@@ -1,0 +1,34 @@
+extends base.pug
+
+block content
+  header
+    a.implicit(href='/')
+      h1
+        | District 61
+  lspace
+  div#main
+    h0.red
+      | ВОЙТИ
+
+    mspace
+
+    form(method='post', action='')
+      label(for='email')
+        | Почта
+      input(name='email', type='text')
+
+      mspace
+      
+      label(for='password')
+        | Пароль
+      input(name='password', type='password')
+
+      lspace
+
+      input.primary-button.green(type='submit', value='ВОЙТИ')
+
+      mspace
+
+      h3.pixel.red
+        =message
+

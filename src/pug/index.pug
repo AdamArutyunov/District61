@@ -2,13 +2,14 @@ extends base.pug
 
 block content
   div#main
+    script(src="https://api-maps.yandex.ru/2.1/?apikey=c4444cfb-7e06-4ac9-a285-370799bb43c8&lang=ru_RU", type="text/javascript")
     h1.green
       | District 61
 
     sspace
     
-    div#map.
-      Я карта, я карта, я карта!
+    div#map
+      script(src='/static/js/map.js')
 
     mspace
 

@@ -28,11 +28,14 @@ h3
   margin: 0 20px
 
 #map
-  height: 500px
+  height: 600px
   display: flex
   justify-content: center
   align-items: center
   border: 3px solid white
+  
+  & a
+    font-size: 10pt
 
 a
   font-family: 'PixelTimes'
@@ -112,6 +115,21 @@ textarea
   outline: none
   padding: 10px
   font-size: 20pt
+
+input[type=text],input[type=password]
+  display: block
+  width: 100%
+  max-width: 400px
+  height: 50px
+  background-color: black
+  border-color: white
+  color: white
+  outline: none
+  padding: 10px
+  font-size: 20pt
+
+input:-webkit-autofill
+    -webkit-box-shadow: inset 0 0 0 50px #fff !important
 
 .primary-button
   border: none
